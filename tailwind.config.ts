@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -47,16 +48,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        phone: {
+          frame: "hsl(var(--phone-frame))",
+          screen: "hsl(var(--phone-screen))",
         },
+        keypad: {
+          bg: "hsl(var(--keypad-bg))",
+          button: "hsl(var(--keypad-button))",
+          "button-hover": "hsl(var(--keypad-button-hover))",
+          "button-active": "hsl(var(--keypad-button-active))",
+        },
+        message: {
+          user: "hsl(var(--message-user))",
+          server: "hsl(var(--message-server))",
+        },
+        "status-bar": "hsl(var(--status-bar))",
       },
       borderRadius: {
         lg: "var(--radius)",
