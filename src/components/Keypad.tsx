@@ -17,7 +17,7 @@ export const Keypad = ({ onKeyPress, onDelete, onSend, disabled }: KeypadProps) 
   ];
 
   return (
-    <div className="bg-keypad-bg px-4 py-1 space-y-1 max-h-50">
+    <div className="bg-keypad-bg px-4 py-1">
       {/* Keypad grid */}
       <div className="grid grid-cols-3 gap-1">
         {keys.flat().map((key) => (
