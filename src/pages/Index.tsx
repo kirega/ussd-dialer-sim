@@ -5,6 +5,7 @@ import { DisplayArea } from "@/components/DisplayArea";
 import { Keypad } from "@/components/Keypad";
 import { StartScreen } from "@/components/StartScreen";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { RotateCcw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -242,13 +243,23 @@ const Index = () => {
       {/* Display area */}
       <DisplayArea messages={session.history} />
 
-      {/* Current input display */}
-      {currentInput && (
-        <div className="px-4 py-2 bg-keypad-bg/50 border-t border-border">
-          <p className="text-xs text-muted-foreground mb-1">Current input:</p>
-          <p className="text-lg font-mono text-primary">{currentInput}</p>
-        </div>
-      )}
+      {/* Input area */}
+      <div className="px-4 py-3 bg-keypad-bg/50 border-t border-border space-y-2">
+        <label className="text-xs text-muted-foreground">Enter your response:</label>
+        <Input
+          type="text"
+          value={currentInput}
+          onChange={(e) => setCurrentInput(e.target.value)}
+          placeholder="Type here or use keypad below..."
+          className="h-12 text-base bg-input border-border"
+          disabled={isLoading || !session.isActive}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSend();
+            }
+          }}
+        />
+      </div>
 
       {/* Keypad */}
       <Keypad
