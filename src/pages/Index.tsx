@@ -263,6 +263,7 @@ const Index = () => {
 
       {/* Keypad */}
       <Keypad
+        className="max-h-50"
         onKeyPress={handleKeyPress}
         onDelete={handleDelete}
         onSend={handleSend}
