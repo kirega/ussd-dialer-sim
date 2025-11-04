@@ -17,15 +17,15 @@ export const Keypad = ({ onKeyPress, onDelete, onSend, disabled }: KeypadProps) 
   ];
 
   return (
-    <div className="bg-keypad-bg px-4 py-1">
+    <div className="bg-keypad-bg px-2 py-1">
       {/* Keypad grid */}
-      <div className="grid grid-cols-3 gap-1">
+      <div className="grid grid-cols-3 gap-0.5">
         {keys.flat().map((key) => (
           <button
             key={key}
             onClick={() => onKeyPress(key)}
             disabled={disabled}
-            className="aspect-square bg-keypad-button hover:bg-keypad-button-hover active:bg-keypad-button-active active:scale-95 rounded-xl text-lg font-semibold text-foreground transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="aspect-square bg-keypad-button hover:bg-keypad-button-hover active:bg-keypad-button-active active:scale-95 rounded-lg text-sm font-semibold text-foreground transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             {key}
           </button>
@@ -33,23 +33,23 @@ export const Keypad = ({ onKeyPress, onDelete, onSend, disabled }: KeypadProps) 
       </div>
 
       {/* Action buttons */}
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-1 mt-1">
         <Button
           onClick={onDelete}
           disabled={disabled}
           variant="secondary"
-          size="lg"
-          className="h-12 text-sm font-semibold rounded-xl"
+          size="sm"
+          className="h-8 text-xs font-semibold rounded-lg"
         >
-          <Delete className="w-5 h-5 mr-2" />
+          <Delete className="w-3 h-3 mr-1" />
           Back
         </Button>
         <Button
           onClick={onSend}
           disabled={disabled}
           variant="default"
-          size="lg"
-          className="h-12 text-sm font-semibold rounded-xl bg-primary hover:bg-primary-glow shadow-lg"
+          size="sm"
+          className="h-8 text-xs font-semibold rounded-lg bg-primary hover:bg-primary-glow shadow-sm"
         >
           Send
         </Button>

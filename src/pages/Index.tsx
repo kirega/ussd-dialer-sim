@@ -244,14 +244,14 @@ const Index = () => {
       <DisplayArea messages={session.history} />
 
       {/* Input area */}
-      <div className="px-3 py-2 bg-keypad-bg/50 border-t border-border space-y-1.5">
-        <label className="text-[10px] text-muted-foreground">Enter your response:</label>
+      <div className="px-2 py-1.5 bg-keypad-bg/50 border-t border-border space-y-1">
+        <label className="text-[9px] text-muted-foreground">Enter your response:</label>
         <Input
           type="text"
           value={currentInput}
           onChange={(e) => setCurrentInput(e.target.value)}
           placeholder="Type here or use keypad below..."
-          className="h-10 text-sm bg-input border-border"
+          className="h-8 text-xs bg-input border-border"
           disabled={isLoading || !session.isActive}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
