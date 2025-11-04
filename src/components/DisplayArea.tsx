@@ -23,11 +23,11 @@ export const DisplayArea = ({ messages }: DisplayAreaProps) => {
   return (
     <div 
       ref={scrollRef}
-      className="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+      className="flex-1 overflow-y-auto px-3 py-3 space-y-2"
       style={{ scrollbarWidth: 'thin', scrollbarColor: 'hsl(var(--border)) transparent' }}
     >
       {messages.length === 0 ? (
-        <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+        <div className="flex items-center justify-center h-full text-muted-foreground text-xs">
           <p>USSD session display</p>
         </div>
       ) : (

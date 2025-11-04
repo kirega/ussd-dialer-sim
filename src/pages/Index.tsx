@@ -224,18 +224,18 @@ const Index = () => {
       <StatusBar />
       
       {/* Header with clear button */}
-      <div className="px-4 py-3 bg-keypad-bg border-b border-border flex items-center justify-between">
+      <div className="px-3 py-2 bg-keypad-bg border-b border-border flex items-center justify-between">
         <div className="flex-1">
-          <p className="text-xs text-muted-foreground">Service Code</p>
-          <p className="text-sm font-mono text-foreground">{session.serviceCode}</p>
+          <p className="text-[10px] text-muted-foreground">Service Code</p>
+          <p className="text-xs font-mono text-foreground">{session.serviceCode}</p>
         </div>
         <Button
           onClick={handleClearSession}
           variant="ghost"
           size="sm"
-          className="h-8 px-3 text-xs"
+          className="h-7 px-2 text-[10px]"
         >
-          <RotateCcw className="w-3 h-3 mr-1" />
+          <RotateCcw className="w-2.5 h-2.5 mr-1" />
           Clear
         </Button>
       </div>
@@ -244,14 +244,14 @@ const Index = () => {
       <DisplayArea messages={session.history} />
 
       {/* Input area */}
-      <div className="px-4 py-3 bg-keypad-bg/50 border-t border-border space-y-2">
-        <label className="text-xs text-muted-foreground">Enter your response:</label>
+      <div className="px-3 py-2 bg-keypad-bg/50 border-t border-border space-y-1.5">
+        <label className="text-[10px] text-muted-foreground">Enter your response:</label>
         <Input
           type="text"
           value={currentInput}
           onChange={(e) => setCurrentInput(e.target.value)}
           placeholder="Type here or use keypad below..."
-          className="h-12 text-base bg-input border-border"
+          className="h-10 text-sm bg-input border-border"
           disabled={isLoading || !session.isActive}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {

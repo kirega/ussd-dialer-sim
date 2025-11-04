@@ -8,15 +8,15 @@ export const StatusBar = () => {
   });
 
   return (
-    <div className="bg-status-bar px-6 pt-3 pb-2 flex items-center justify-between text-xs text-foreground/80">
+    <div className="bg-status-bar px-4 pt-2 pb-1.5 flex items-center justify-between text-[10px] text-foreground/80">
       <div className="flex items-center gap-1">
-        <Signal className="w-3 h-3" />
-        <Wifi className="w-3 h-3" />
+        <Signal className="w-2.5 h-2.5" />
+        <Wifi className="w-2.5 h-2.5" />
       </div>
       <div className="font-medium">{currentTime}</div>
       <div className="flex items-center gap-1">
-        <Battery className="w-4 h-4" />
-        <span className="text-[10px]">98%</span>
+        <Battery className="w-3.5 h-3.5" />
+        <span className="text-[9px]">98%</span>
       </div>
     </div>
   );
