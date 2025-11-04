@@ -8,7 +8,7 @@ interface StartScreenProps {
 }
 
 export const StartScreen = ({ onStart }: StartScreenProps) => {
-  const [serviceCode, setServiceCode] = useState("*384*272758#");
+  const [serviceCode, setServiceCode] = useState("*274*6#");
 
   const handleStart = () => {
     if (serviceCode.trim()) {
@@ -34,7 +34,7 @@ export const StartScreen = ({ onStart }: StartScreenProps) => {
             type="text"
             value={serviceCode}
             onChange={(e) => setServiceCode(e.target.value)}
-            placeholder="*384*272758#"
+            placeholder="*274*6#"
             className="text-center text-base font-mono h-10 bg-input border-border"
             onKeyDown={(e) => e.key === 'Enter' && handleStart()}
           />

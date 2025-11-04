@@ -6,9 +6,10 @@ interface KeypadProps {
   onDelete: () => void;
   onSend: () => void;
   disabled?: boolean;
+  className?: string;
 }
 
-export const Keypad = ({ onKeyPress, onDelete, onSend, disabled }: KeypadProps) => {
+export const Keypad = ({ onKeyPress, onDelete, onSend, disabled, className }: KeypadProps) => {
   const keys = [
     ['1', '2', '3'],
     ['4', '5', '6'],
@@ -17,7 +18,7 @@ export const Keypad = ({ onKeyPress, onDelete, onSend, disabled }: KeypadProps) 
   ];
 
   return (
-    <div className="bg-keypad-bg px-2 py-1">
+    <div className={`bg-keypad-bg px-2 py-1 ${className || ''}`}>
       {/* Keypad grid */}
       <div className="grid grid-cols-3 gap-0.5">
         {keys.flat().map((key) => (
@@ -25,7 +26,7 @@ export const Keypad = ({ onKeyPress, onDelete, onSend, disabled }: KeypadProps) 
             key={key}
             onClick={() => onKeyPress(key)}
             disabled={disabled}
-            className="aspect-square bg-keypad-button hover:bg-keypad-button-hover active:bg-keypad-button-active active:scale-95 rounded-lg text-sm font-semibold text-foreground transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+            className="aspect-video bg-keypad-button hover:bg-keypad-button-hover active:bg-keypad-button-active active:scale-95 rounded-lg text-sm font-semibold text-foreground transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             {key}
           </button>

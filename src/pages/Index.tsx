@@ -25,7 +25,7 @@ interface SessionState {
   isActive: boolean;
 }
 
-const ENDPOINT = "https://qa-payment.spironet.com/union/ug/ussd/callback";
+const ENDPOINT = "https://payment.spironet.com/union/ug/ussd/callback";
 const NETWORK_CODE = "64101";
 
 const Index = () => {
@@ -62,7 +62,7 @@ const Index = () => {
       });
 
       const responseText = await response.text();
-      
+
       // Parse response (CON/END format or JSON)
       let message = responseText;
       let isContinuation = true;
@@ -95,8 +95,15 @@ const Index = () => {
 
       setSession((prev) => ({
         ...prev,
-        history: newHistory,
-        isActive: isContinuation,
+        history: [
+          ...prev.history,
+          {
+            from: "gateway" as const,
+            message: message,
+            timestamp: Date.now(),
+          },
+        ],
+        // isActive: isContinuation,
       }));
 
       if (!isContinuation) {
@@ -113,14 +120,16 @@ const Index = () => {
         title: "Connection Error",
         description: "Failed to connect to USSD gateway. Please try again.",
       });
-      
+
       setSession((prev) => ({
         ...prev,
         history: [
           ...prev.history,
           {
             from: "gateway" as const,
-            message: `Error: ${error instanceof Error ? error.message : "Network failure"}`,
+            message: `Error: ${
+              error instanceof Error ? error.message : "Network failure"
+            }`,
             timestamp: Date.now(),
           },
         ],
@@ -153,7 +162,7 @@ const Index = () => {
       const segments = session.text.split("*");
       const newText = segments.slice(0, -1).join("*");
       setSession((prev) => ({ ...prev, text: newText }));
-      
+
       // Remove last user message from history
       const newHistory = [...session.history];
       for (let i = newHistory.length - 1; i >= 0; i--) {
@@ -170,24 +179,32 @@ const Index = () => {
     if (!currentInput.trim() || isLoading) return;
 
     const userInput = currentInput.trim();
-    
+
     // Update text chain
-    const newText = session.text === "" ? userInput : `${session.text}*${userInput}`;
-    
+    const newText =
+      session.text === "" ? userInput : `${session.text}*${userInput}`;
+
     // Add user message to history
-    const newHistory = [
-      ...session.history,
-      {
-        from: "user" as const,
-        message: userInput,
-        timestamp: Date.now(),
-      },
-    ];
+    // const newHistory = [
+    //   ...session.history,
+    //   {
+    //     from: "user" as const,
+    //     message: userInput,
+    //     timestamp: Date.now(),
+    //   },
+    // ];
 
     setSession((prev) => ({
       ...prev,
       text: newText,
-      history: newHistory,
+      history: [
+        ...prev.history,
+        {
+          from: "user" as const,
+          message: userInput,
+          timestamp: Date.now(),
+        },
+      ],
     }));
 
     await sendRequest(newText);
@@ -222,12 +239,14 @@ const Index = () => {
   return (
     <PhoneFrame>
       <StatusBar />
-      
+
       {/* Header with clear button */}
       <div className="px-3 py-2 bg-keypad-bg border-b border-border flex items-center justify-between">
         <div className="flex-1">
           <p className="text-[10px] text-muted-foreground">Service Code</p>
-          <p className="text-xs font-mono text-foreground">{session.serviceCode}</p>
+          <p className="text-xs font-mono text-foreground">
+            {session.serviceCode}
+          </p>
         </div>
         <Button
           onClick={handleClearSession}
@@ -245,7 +264,9 @@ const Index = () => {
 
       {/* Input area */}
       <div className="px-2 py-1.5 bg-keypad-bg/50 border-t border-border space-y-1">
-        <label className="text-[9px] text-muted-foreground">Enter your response:</label>
+        <label className="text-[9px] text-muted-foreground">
+          Enter your response:
+        </label>
         <Input
           type="text"
           value={currentInput}
@@ -254,7 +275,7 @@ const Index = () => {
           className="h-8 text-xs bg-input border-border"
           disabled={isLoading || !session.isActive}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleSend();
             }
           }}
